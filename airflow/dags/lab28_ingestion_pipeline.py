@@ -287,9 +287,14 @@ def lab28_ingestion_pipeline() -> None:
         return {"published": True, **event.model_dump(mode="json")}
 
     merged = drain_kafka_into_delta()
-    announce_processed_batch(
-        merged, refresh_online_features(merged), index_new_documents(merged)
-    )
+    features = refresh_online_features(merged)
+    vectors = index_new_documents(merged)
+
+    # The local lab runs Spark and FastEmbed under one Docker Desktop memory
+    # budget.  Serialising these two memory-heavy tasks avoids an OOM kill while
+    # preserving the same data dependencies and published asset contract.
+    features >> vectors
+    announce_processed_batch(merged, features, vectors)
 
 
 lab28_ingestion_pipeline()

@@ -1,0 +1,29 @@
+{
+  "topic": "data.raw",
+  "key": "it-j1-f8803706",
+  "partition": 0,
+  "offset": 44,
+  "headers": {
+    "idempotency-key": "it-j1-f8803706",
+    "traceparent": "00-ef6252fd5ce54ce6b056a8396c5b048c-5fd7b611080c805a-01",
+    "schema_version": "1"
+  },
+  "trace_id": "ef6252fd5ce54ce6b056a8396c5b048c",
+  "value": {
+    "schema_version": "1",
+    "event_id": "5977190b49dd461e8a1e6c66cfa5656f",
+    "idempotency_key": "fb:it-j1-f8803706:ab3bd0f45566afb9d007620b0f308de2",
+    "entity_id": "it-j1-f8803706",
+    "occurred_at": "2026-09-03T05:37:28.974848Z",
+    "producer": "lab28-api",
+    "traceparent": "00-ef6252fd5ce54ce6b056a8396c5b048c-2fbf4795dae7e8fc-01",
+    "payload": {
+      "kind": "feedback",
+      "asker_id": "it-j1-f8803706",
+      "text": "Nền tảng chạy ổn định trong bài kiểm thử f8803706.",
+      "rating": 5,
+      "locale": "vi",
+      "label": "positive"
+    }
+  }
+}

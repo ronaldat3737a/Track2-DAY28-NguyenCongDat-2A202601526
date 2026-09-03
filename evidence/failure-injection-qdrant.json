@@ -1,0 +1,62 @@
+{
+  "scenario": "Qdrant down",
+  "inject_command": "docker compose --env-file ports.template stop qdrant",
+  "recover_command": "docker compose --env-file ports.template start qdrant",
+  "timeline": [
+    {
+      "phase": "before",
+      "timestamp_utc": "2026-09-03T05:48:13Z",
+      "qdrant_points_count": 24,
+      "qdrant_status": "green",
+      "readiness": "ready-components: kafka=true, mlflow=true, qdrant=true, feast=true, vllm=false (expected, no GPU)"
+    },
+    {
+      "phase": "inject",
+      "timestamp_utc": "2026-09-03T05:48:28Z",
+      "action": "docker compose stop qdrant"
+    },
+    {
+      "phase": "during_outage",
+      "timestamp_utc": "2026-09-03T05:48:33Z",
+      "lab28_ready_status": "not_ready",
+      "qdrant_component": {
+        "ready": false,
+        "detail": "0 points; ResponseHandlingException: [WinError 10061] No connection could be made because the target machine actively refused it"
+      },
+      "api_ask_request": {
+        "endpoint": "POST http://localhost:8000/api/v1/ask",
+        "status_code": 503,
+        "body": {
+          "schema_version": "1",
+          "category": "dependency_unavailable",
+          "message": "inference endpoint unavailable: vLLM unreachable: ConnectError",
+          "trace_id": "4e4cfac0dee28d6fbcd25d8d340e5bf6",
+          "service": "lab28-api",
+          "retryable": true
+        }
+      }
+    },
+    {
+      "phase": "recover",
+      "timestamp_utc": "2026-09-03T05:49:19Z",
+      "action": "docker compose start qdrant"
+    },
+    {
+      "phase": "after",
+      "timestamp_utc": "2026-09-03T05:49:28Z",
+      "qdrant_points_count": 24,
+      "qdrant_status": "green",
+      "lab28_ready_qdrant_component": {
+        "ready": true,
+        "detail": "24 points; ok"
+      }
+    }
+  ],
+  "data_loss_check": {
+    "points_before": 24,
+    "points_after": 24,
+    "delta": 0,
+    "result": "no data loss"
+  },
+  "note": "vllm component remains not_ready throughout (UNVERIFIED — no GPU-backed vLLM server available on this machine), independent of the injected Qdrant failure."
+}

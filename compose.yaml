@@ -148,6 +148,10 @@ services:
       - --conf
       - spark.sql.session.timeZone=UTC
       - --conf
+      - spark.sql.shuffle.partitions=1
+      - --conf
+      - spark.default.parallelism=1
+      - --conf
       - spark.driver.memory=1g
     ports:
       - "${LAB28_SPARK_PORT:-15002}:15002"

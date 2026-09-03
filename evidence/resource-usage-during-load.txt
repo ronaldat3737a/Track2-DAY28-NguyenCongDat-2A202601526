@@ -1,0 +1,15 @@
+NAME                              CPU %     MEM USAGE / LIMIT
+lab28-platform-grafana-1          2.73%     218.2MiB / 5.675GiB
+lab28-platform-api-1              92.02%    744.1MiB / 5.675GiB
+lab28-platform-airflow-1          6.26%     934.4MiB / 5.675GiB
+lab28-platform-spark-connect-1    0.25%     1.438GiB / 5.675GiB
+lab28-platform-feast-1            2.77%     140MiB / 5.675GiB
+lab28-platform-prometheus-1       3.20%     73.78MiB / 5.675GiB
+lab28-platform-gateway-1          2.15%     13.69MiB / 5.675GiB
+lab28-platform-kafka-exporter-1   3.25%     11.5MiB / 5.675GiB
+lab28-platform-otel-collector-1   1.28%     55.08MiB / 5.675GiB
+lab28-platform-kafka-1            32.91%    302.6MiB / 5.675GiB
+lab28-platform-pushgateway-1      0.00%     17.13MiB / 5.675GiB
+lab28-platform-mlflow-1           51.09%    637.6MiB / 5.675GiB
+lab28-platform-jaeger-1           3.04%     24.04MiB / 5.675GiB
+lab28-platform-qdrant-1           1.50%     71.83MiB / 5.675GiB

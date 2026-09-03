@@ -248,7 +248,11 @@ class BatchConsumer:
                 "auto.offset.reset": "earliest",
                 "enable.auto.commit": False,
                 "session.timeout.ms": 45000,
-                "max.poll.interval.ms": 300000,
+                # A first Delta MERGE can spend several minutes downloading
+                # Spark/Delta metadata and materialising the tables.  Keep the
+                # assignment for the whole bounded batch so the durable write
+                # can be followed by the manual offset commit.
+                "max.poll.interval.ms": 1_800_000,
             }
         )
         self._consumer.subscribe([self._topic])
